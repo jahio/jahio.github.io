@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>meta on J. Austin Hughey: Developer Notebook</title>
-    <link>http://jahio.github.io/tags/meta/</link>
+    <link>https://jah.io/tags/meta/</link>
     <description>Recent content in meta on J. Austin Hughey: Developer Notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>2020 J. Austin Hughey</copyright><atom:link href="http://jahio.github.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>2020 J. Austin Hughey</copyright><atom:link href="https://jah.io/tags/meta/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Moving to Hugo</title>
-      <link>http://jahio.github.io/posts/moving-to-hugo/</link>
+      <link>https://jah.io/posts/moving-to-hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://jahio.github.io/posts/moving-to-hugo/</guid>
+      <guid>https://jah.io/posts/moving-to-hugo/</guid>
       <description>I&amp;rsquo;m moving my blog away from Ghost on Digital Ocean due to the pain in the posterior it is to manage, and the monthly cost associated with it. Instead, I&amp;rsquo;m trying out hugo on GitHub Pages. This is just a test post to get things going.</description>
     </item>
     
