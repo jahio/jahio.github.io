@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aws on J. Austin Hughey: Developer Notebook</title>
+    <link>https://jah.io/tags/aws/</link>
+    <description>Recent content in aws on J. Austin Hughey: Developer Notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2020 J. Austin Hughey</copyright>
+    <lastBuildDate>Thu, 11 Jun 2020 08:18:34 +0000</lastBuildDate><atom:link href="https://jah.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Where do I store my AWS credentials for working with Terraform? (2019)</title>
+      <link>https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:18:34 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/</guid>
+      <description>It&amp;rsquo;s always a good practice to keep your authentication/authorization details out of your code (or anything that&amp;rsquo;ll be shared with others via source control, etc.). So when working with AWS and Terraform, how do you securely tell it what your AWS credentials are?
+The answer: $HOME/.aws/credentials
+(On Windows, &amp;quot;%USERPROFILE%\.aws\credentials&amp;quot;.)
+This is going to be a plain text file named &amp;ldquo;credentials&amp;rdquo; in that directory. A minimal implementation will contain just 3 lines.</description>
+    </item>
+    
+  </channel>
+</rss>

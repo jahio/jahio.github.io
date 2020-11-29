@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>ld: library not found for -lssl after updating XCode (2019) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I recently updated XCode on my MacOS Mojave hackintosh, and to my surprise thereafter, was unable to install a version of the MySQL2 gem for a project I was working on. The solution ultimately was to install a package I didn&amp;rsquo;t know existed.
+When upgrading to a slightly newer version of Ruby for a (somewhat legacy) project I was working on, I had to re-bundle to reinstall gems. One of those was mysql2." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ld: library not found for -lssl after updating XCode (2019)">
+<meta property="og:description" content="I recently updated XCode on my MacOS Mojave hackintosh, and to my surprise thereafter, was unable to install a version of the MySQL2 gem for a project I was working on. The solution ultimately was to install a package I didn&amp;rsquo;t know existed.
+When upgrading to a slightly newer version of Ruby for a (somewhat legacy) project I was working on, I had to re-bundle to reinstall gems. One of those was mysql2." />
+<meta property="og:url" content="https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+  <meta property="article:section" content="xcode" />
+
+  <meta property="article:section" content="macos" />
+
+
+  <meta property="article:published_time" content="2020-06-11 08:17:37 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/">ld: library not found for -lssl after updating XCode (2019)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://jah.io/tags/xcode/">xcode</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/macos/">macos</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>I recently updated XCode on my MacOS Mojave hackintosh, and to my surprise thereafter, was unable to install a version of the MySQL2 gem for a project I was working on. The solution ultimately was to install a package I didn&rsquo;t know existed.</p>
+<p>When upgrading to a slightly newer version of Ruby for a (somewhat legacy) project I was working on, I had to re-bundle to reinstall gems. One of those was <code>mysql2</code>. But I had just updated XCode and unbeknownst to me, that update had (re)moved multiple header files needed to compile all sorts of things, including this gem.</p>
+<p>So when I tried <code>bundle</code>, eventually I got this:</p>
+<pre><code>Fetching mysql2 0.3.21
+Installing mysql2 0.3.21 with native extensions
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    current directory: /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.3.21/ext/mysql2
+/Users/jah/.rbenv/versions/2.3.8/bin/ruby -r ./siteconf20190326-24430-11b9ea0.rb extconf.rb
+checking for ruby/thread.h... yes
+checking for rb_thread_call_without_gvl() in ruby/thread.h... yes
+checking for rb_thread_blocking_region()... no
+checking for rb_wait_for_single_fd()... yes
+checking for rb_hash_dup()... yes
+checking for rb_intern3()... yes
+-----
+Using mysql_config at /Users/jah/.brew/bin/mysql_config
+-----
+checking for mysql.h... yes
+checking for errmsg.h... yes
+checking for mysqld_error.h... yes
+-----
+Don't know how to set rpath on your system, if MySQL libraries are not in path mysql2 may not load
+-----
+-----
+Setting libpath to /Users/jah/.brew/Cellar/mysql@5.7/5.7.25/lib
+-----
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/extensions/x86_64-darwin-18/2.3.0-static/mysql2-0.3.21/mkmf.log
+
+current directory: /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.3.21/ext/mysql2
+make &quot;DESTDIR=&quot; clean
+
+current directory: /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.3.21/ext/mysql2
+make &quot;DESTDIR=&quot;
+compiling client.c
+compiling infile.c
+compiling mysql2_ext.c
+compiling result.c
+linking shared-object mysql2/mysql2.bundle
+ld: library not found for -lssl
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [mysql2.bundle] Error 1
+
+make failed, exit code 2
+
+Gem files will remain installed in /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.3.21 for inspection.
+Results logged to /Users/jah/.rbenv/versions/2.3.8/lib/ruby/gems/2.3.0/extensions/x86_64-darwin-18/2.3.0-static/mysql2-0.3.21/gem_make.out
+
+An error occurred while installing mysql2 (0.3.21), and Bundler cannot continue.
+
+</code></pre><p>Well, that&rsquo;s rather cryptic, isnt' it? So why did it fail to compile?</p>
+<p>When looking at <code>mkmf.log</code> as suggested, I found out why:</p>
+<pre><code>ld: library not found for -lssl
+
+</code></pre><p>Well, that&rsquo;s not great, is it?</p>
+<blockquote>
+<p>So how do you fix that?</p>
+</blockquote>
+<p>Run this in terminal:</p>
+<p><code>open /Library/Developer/CommandLineTools/Packages</code></p>
+<p>Double click <code>macOS_SDK_headers_for_macOS_10.14.pkg</code> and install, then re-try installing your gem or recompiling whatever was failing before.</p>
+<p>Might work for multiple missing libraries that <code>ld</code> complains about not finding.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Where do I store my AWS credentials for working with Terraform? (2019)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/">
+                <span class="button__text">Using dd to Create OS Installation Disks (USB) (2019)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Using dd to Create OS Installation Disks (USB) (2019) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When creating OS installation media, a lot of people suggest using various third party tools, such as Etcher and others. However, it&amp;rsquo;s fairly easy just using dd (Data Dump) on any Unix-like OS to do the same thing.
+Zero Out the Disk Insert a USB stick and identify its appropriate name under /dev/. For MacOS, you can try diskutil list - just identify the disk that wasn&amp;rsquo;t there before you inserted your USB stick." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Using dd to Create OS Installation Disks (USB) (2019)">
+<meta property="og:description" content="When creating OS installation media, a lot of people suggest using various third party tools, such as Etcher and others. However, it&amp;rsquo;s fairly easy just using dd (Data Dump) on any Unix-like OS to do the same thing.
+Zero Out the Disk Insert a USB stick and identify its appropriate name under /dev/. For MacOS, you can try diskutil list - just identify the disk that wasn&amp;rsquo;t there before you inserted your USB stick." />
+<meta property="og:url" content="https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+  <meta property="article:section" content="macos" />
+
+  <meta property="article:section" content="cli" />
+
+  <meta property="article:section" content="terminal" />
+
+  <meta property="article:section" content="tips" />
+
+
+  <meta property="article:published_time" content="2020-06-11 08:16:58 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/">Using dd to Create OS Installation Disks (USB) (2019)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://jah.io/tags/macos/">macos</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/cli/">cli</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/terminal/">terminal</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/tips/">tips</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>When creating OS installation media, a lot of people suggest using various third party tools, such as <a href="https://www.balena.io/etcher/">Etcher</a> and others. However, it&rsquo;s fairly easy just using <code>dd</code> (Data Dump) on any Unix-like OS to do the same thing.</p>
+<h3 id="zero-out-the-disk">Zero Out the Disk<a href="#zero-out-the-disk" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Insert a USB stick and identify its appropriate name under <code>/dev/</code>. For MacOS, you can try <code>diskutil list</code> - just identify the disk that wasn&rsquo;t there before you inserted your USB stick. Then use <code>diskutil unmountDisk /dev/rdisk#</code> where <code>#</code> is the disk number. Note the <code>r</code> in <code>rdisk</code> - stands for &ldquo;raw&rdquo;, in other words, the disk device itself, not a filesystem or partition <em>on</em> the device.</p>
+<p>Now to zero out the disk, use <code>dd</code> with an <em>input file</em> (<code>if=</code>) of <code>/dev/zero</code> and an <em>output file</em> of <code>/dev/rdisk#</code>:</p>
+<pre><code>$ dd if=/dev/zero of=/dev/rdisk4 bs=1m
+
+</code></pre><p>In this example we&rsquo;re zeroing-out <code>rdisk4</code> with a block size (<code>bs=</code>) of 1 megabyte.</p>
+<p>On MacOS, you can use <code>CTRL+T</code> (not CMD, CTRL) to check progress. It&rsquo;ll report the number of bytes written over a number of seconds.</p>
+<h3 id="write-the-iso-to-the-disk">Write the ISO to the disk<a href="#write-the-iso-to-the-disk" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Once that finishes, you can use the same command, just with a different <em>input file</em> (<code>if=</code>) to write the ISO to disk:</p>
+<pre><code>$ dd if=/Users/jah/Downloads/some-os.iso of=/dev/rdisk4 bs=1m
+
+</code></pre><p>When finished, ensure the disk isn&rsquo;t mounted (eject it if so) and you&rsquo;re good to go!</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/">
+                <span class="button__icon">←</span>
+                <span class="button__text">ld: library not found for -lssl after updating XCode (2019)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/">
+                <span class="button__text">Serving Static Assets Over localhost HTTP with Caddy (2018)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -3,15 +3,227 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jah.io/tags/blog/</loc>
+    <loc>https://jah.io/categories/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jah.io/categories/</loc>
+    <loc>https://jah.io/tags/frontend/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/frontend/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://jah.io/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/javascript/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/javascript/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/reactjs/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/reactjs/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/vuejs/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/vuejs/</loc>
+    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/aws/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/aws/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/devops/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/devops/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/terraform/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/terraform/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/</loc>
+    <lastmod>2020-06-11T08:18:34+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/</loc>
+    <lastmod>2020-06-11T08:17:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/macos/</loc>
+    <lastmod>2020-06-11T08:17:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/macos/</loc>
+    <lastmod>2020-06-11T08:17:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/xcode/</loc>
+    <lastmod>2020-06-11T08:17:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/xcode/</loc>
+    <lastmod>2020-06-11T08:17:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/cli/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/cli/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/terminal/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/terminal/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/tips/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/tips/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</loc>
+    <lastmod>2020-06-11T08:16:58+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/</loc>
+    <lastmod>2020-06-11T08:16:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/</loc>
+    <lastmod>2020-06-11T08:15:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/</loc>
+    <lastmod>2020-06-11T08:15:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/wget-download-entire-directories-over-http-2018/</loc>
+    <lastmod>2020-06-11T08:14:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/</loc>
+    <lastmod>2020-06-11T08:14:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/video-co-presenting-trailblazer-with-nick-sutterer-2015/</loc>
+    <lastmod>2020-06-11T08:01:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/video-app-server-arena-comparing-ruby-application-servers-2013/</loc>
+    <lastmod>2020-06-11T07:59:26+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/video-rails-4-changes-and-new-features-2013/</loc>
+    <lastmod>2020-06-11T07:57:17+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/new-relic-request-queueing-2013/</loc>
+    <lastmod>2020-06-11T07:55:52+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/new-features-in-rails-3-1-2011/</loc>
+    <lastmod>2020-06-11T07:55:17+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/from-rails-2-3-to-3-0-2011/</loc>
+    <lastmod>2020-06-11T07:54:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/blog/</loc>
   </url>
   
   <url>
@@ -20,14 +232,6 @@
   
   <url>
     <loc>https://jah.io/posts/moving-to-hugo/</loc>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/posts/</loc>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/</loc>
   </url>
   
 </urlset>

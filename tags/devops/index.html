@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>devops :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/tags/devops/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="devops">
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://jah.io/tags/devops/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+
+
+
+  <link href="/tags/devops/index.xml" rel="alternate" type="application/rss+xml" title="J. Austin Hughey: Developer Notebook" />
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+  
+  <div class="posts">
+    
+      <div class="post on-list">
+        <h1 class="post-title">
+          <a href="https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/">Where do I store my AWS credentials for working with Terraform? (2019)</a>
+        </h1>
+        <div class="post-meta">
+          <span class="post-date">
+            2020-06-11
+          </span>
+          
+            <span class="post-author">:: J. Austin Hughey</span>
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+            #<a href="https://jah.io/tags/aws/">aws</a>&nbsp;
+            
+            #<a href="https://jah.io/tags/devops/">devops</a>&nbsp;
+            
+            #<a href="https://jah.io/tags/terraform/">terraform</a>&nbsp;
+            
+          </span>
+        
+
+        
+
+        <div class="post-content">
+          
+          
+          It’s always a good practice to keep your authentication/authorization details out of your code (or anything that’ll be shared with others via source control, etc.). So when working with AWS and Terraform, how do you securely tell it what your AWS credentials are?
+The answer: $HOME/.aws/credentials
+(On Windows, &quot;%USERPROFILE%.aws\credentials&quot;.)
+This is going to be a plain text file named “credentials” in that directory. A minimal implementation will contain just 3 lines.
+          
+          
+        </div>
+
+        
+        <div>
+          <a class="read-more button"
+            href="/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/">Read more →</a>
+        </div>
+        
+      </div>
+    
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

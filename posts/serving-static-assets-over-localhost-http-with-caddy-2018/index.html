@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Serving Static Assets Over localhost HTTP with Caddy (2018) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Caddy is a great HTTP/2 server written in Go that you can set up rather easily on MacOS to serve static assets over localhost. This is a quick how-to showing how I personally have it set up for development/testing purposes.
+Install It I use Homebrew to install such things:
+brew install caddy This will install Caddy, but won&amp;rsquo;t create a configuration file for it. By default, Caddy will serve HTTP assets in the directory you start it from if you do so in the foreground, but since I wanted this always running as a service, I needed to create a simple configuration file and use brew services to automate loading it with MacOS&#39; launchctl." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Serving Static Assets Over localhost HTTP with Caddy (2018)">
+<meta property="og:description" content="Caddy is a great HTTP/2 server written in Go that you can set up rather easily on MacOS to serve static assets over localhost. This is a quick how-to showing how I personally have it set up for development/testing purposes.
+Install It I use Homebrew to install such things:
+brew install caddy This will install Caddy, but won&amp;rsquo;t create a configuration file for it. By default, Caddy will serve HTTP assets in the directory you start it from if you do so in the foreground, but since I wanted this always running as a service, I needed to create a simple configuration file and use brew services to automate loading it with MacOS&#39; launchctl." />
+<meta property="og:url" content="https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-06-11 08:16:32 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/">Serving Static Assets Over localhost HTTP with Caddy (2018)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p><a href="https://caddyserver.com/">Caddy</a> is a great HTTP/2 server written in Go that you can set up rather easily on MacOS to serve static assets over <code>localhost</code>. This is a quick how-to showing how I personally have it set up for development/testing purposes.</p>
+<h3 id="install-it">Install It<a href="#install-it" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>I use <a href="http://brew.sh/">Homebrew</a> to install such things:</p>
+<pre><code>brew install caddy
+
+</code></pre><p>This will install Caddy, <em>but won&rsquo;t create a configuration file for it.</em> By default, Caddy will serve HTTP assets in the directory you start it from if you do so in the foreground, but since I wanted this always running as a service, I needed to create a simple configuration file and use <code>brew services</code> to automate loading it with MacOS' <code>launchctl</code>.</p>
+<h3 id="load-it-as-a-service">Load It As A Service<a href="#load-it-as-a-service" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Let&rsquo;s use <code>brew services</code> to start it:</p>
+<pre><code>brew services start caddy
+
+</code></pre><p>Now if you check on it using <code>brew services list</code> you&rsquo;ll probably see it as <code>started</code> but written in <em>yellow</em>. This is because the <code>launchd</code> configuration it uses relies on a configuration file that doesn&rsquo;t yet exist. So let&rsquo;s write one.</p>
+<h3 id="configure-it">Configure It<a href="#configure-it" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Now that it&rsquo;s &ldquo;running&rdquo;, let&rsquo;s see if we can find where the <code>launchctl</code> plist file is that tells it how to start:</p>
+<pre><code>brew services list
+
+</code></pre><p>You should see all running services under Homebrew here with a path to where the <code>launchctl</code> configuration plist is located. In my case, this was <code>/Users/jah/Library/LaunchAgents/homebrew.mxcl.caddy.plist</code>.</p>
+<p>[&hellip;] <!-- raw HTML omitted -->ProgramArguments<!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted -->/Users/jah/.brew/opt/caddy/bin/caddy<!-- raw HTML omitted --> <!-- raw HTML omitted -->-conf<!-- raw HTML omitted --> <!-- raw HTML omitted -->/Users/jah/.brew/etc/Caddyfile<!-- raw HTML omitted --> <!-- raw HTML omitted --> [&hellip;]</p>
+<p>The contents of that file reveal that Caddy is being told that the configuration file it needs (<code>Caddyfile</code>) is located in <code>/Users/jah/.brew/etc/Caddyfile</code>, but looking there, <strong>there&rsquo;s no such file!</strong></p>
+<p>So let&rsquo;s create one. Here&rsquo;s a minimal configuration for how to let it serve static files in a given directory that I just happened to already have on my machine:</p>
+<pre><code>localhost:8888 {
+  gzip
+  log /tmp/caddy.8888.log
+  root /Users/jah/.www
+}
+
+</code></pre><h4 id="quick-tour-of-directives">Quick Tour of Directives<a href="#quick-tour-of-directives" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<ul>
+<li><code>localhost:8888</code>: Tells Caddy where to bind and on what port.</li>
+<li><code>gzip</code>: standard HTTP command telling Caddy to compress the stuff it sends downstream. Widely used and has been for years.</li>
+<li><code>log</code>: I set this to <code>/tmp/caddy.8888.log</code> because any issues I have with Caddy, I&rsquo;ll debug in real time and I don&rsquo;t want log files eating up huge amounts of space on disk. Anything under <code>/tmp</code> gets nuked every time you reboot, so rebooting my developoment machine (which I do once or twice a week anyway) will clean up the logs for me automatically.</li>
+<li><code>root</code>: This is where Caddy looks for files to serve. In this case, <code>$HOME/.www</code> is a symlink to another directory I keep backed up.</li>
+</ul>
+<h3 id="restart-caddy">Restart Caddy<a href="#restart-caddy" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Now that our configuration is in place, we can restart Caddy to have it pick things up correctly:</p>
+<pre><code>brew restart caddy
+
+</code></pre><p>Now if you go to <a href="http://localhost:8888/">http://localhost:8888/</a> you should see a 404 if you have nothing in <code>$HOME/.www</code>, otherwise you should see the contents of <code>index.html</code> (create one if you haven&rsquo;t already).</p>
+<h3 id="symlinks-make-things-easier">Symlinks Make Things Easier<a href="#symlinks-make-things-easier" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>I&rsquo;ve created a more permanent <code>.conf</code> directory somewhere that&rsquo;s regularly backed up, and symlink&rsquo;d <code>/Users/jah/.brew/etc/Caddyfile</code> to <code>.conf/Caddyfile</code> so my configuration is always up to date. This makes it easier to work with the configuration without having to hunt down the path again six months from now when you need to make changes and forgot where you had all that to begin with!</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Using dd to Create OS Installation Disks (USB) (2019)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/">
+                <span class="button__text">Hackintosh: How to find out what motherboard model you have (2018)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -6,7 +6,175 @@
     <description>Recent content on J. Austin Hughey: Developer Notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>2020 J. Austin Hughey</copyright><atom:link href="https://jah.io/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>2020 J. Austin Hughey</copyright>
+    <lastBuildDate>Thu, 11 Jun 2020 08:19:36 +0000</lastBuildDate><atom:link href="https://jah.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React vs. Vue: An Explorative Comparison (2020)</title>
+      <link>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</link>
+      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</guid>
+      <description>I recently wrote an article for Josh Software, a software consultancy that I began working for in April of this year. It&amp;rsquo;s about the differences between React.js and Vue.js (version 2) and explores those differences from a variety of perspectives for the benefit of front-end developers.
+Coming into the research phase of this article, I hadn&amp;rsquo;t seriously done anything with front-end since the days of Netscape Navigator! I&amp;rsquo;ve of course kept up with changes over the years, but I haven&amp;rsquo;t really worked in front end exclusively or heavily since the mid to late 2000&amp;rsquo;s.</description>
+    </item>
+    
+    <item>
+      <title>Fixing Safari&#39;s Cache With Vue.js (Developer Mode) (2020)</title>
+      <link>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</link>
+      <pubDate>Thu, 11 Jun 2020 08:19:10 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</guid>
+      <description>I happen to like Apple&amp;rsquo;s Safari browser, and I&amp;rsquo;d like to use it when developing stuff with Vue.js. I ran into a problem with this, however: Safari would cache the response from the live-reload development server on localhost, so that when I made changes it didn&amp;rsquo;t update, even when hitting the reload button. I think I&amp;rsquo;ve solved this though with a Cache-Control header configued in the project&amp;rsquo;s vue.config.js file.
+tl;dr Put this in a file at project root called vue.</description>
+    </item>
+    
+    <item>
+      <title>Where do I store my AWS credentials for working with Terraform? (2019)</title>
+      <link>https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:18:34 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/</guid>
+      <description>It&amp;rsquo;s always a good practice to keep your authentication/authorization details out of your code (or anything that&amp;rsquo;ll be shared with others via source control, etc.). So when working with AWS and Terraform, how do you securely tell it what your AWS credentials are?
+The answer: $HOME/.aws/credentials
+(On Windows, &amp;quot;%USERPROFILE%\.aws\credentials&amp;quot;.)
+This is going to be a plain text file named &amp;ldquo;credentials&amp;rdquo; in that directory. A minimal implementation will contain just 3 lines.</description>
+    </item>
+    
+    <item>
+      <title>ld: library not found for -lssl after updating XCode (2019)</title>
+      <link>https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:17:37 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/</guid>
+      <description>I recently updated XCode on my MacOS Mojave hackintosh, and to my surprise thereafter, was unable to install a version of the MySQL2 gem for a project I was working on. The solution ultimately was to install a package I didn&amp;rsquo;t know existed.
+When upgrading to a slightly newer version of Ruby for a (somewhat legacy) project I was working on, I had to re-bundle to reinstall gems. One of those was mysql2.</description>
+    </item>
+    
+    <item>
+      <title>Using dd to Create OS Installation Disks (USB) (2019)</title>
+      <link>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:16:58 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</guid>
+      <description>When creating OS installation media, a lot of people suggest using various third party tools, such as Etcher and others. However, it&amp;rsquo;s fairly easy just using dd (Data Dump) on any Unix-like OS to do the same thing.
+Zero Out the Disk Insert a USB stick and identify its appropriate name under /dev/. For MacOS, you can try diskutil list - just identify the disk that wasn&amp;rsquo;t there before you inserted your USB stick.</description>
+    </item>
+    
+    <item>
+      <title>Serving Static Assets Over localhost HTTP with Caddy (2018)</title>
+      <link>https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/</link>
+      <pubDate>Thu, 11 Jun 2020 08:16:32 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/</guid>
+      <description>Caddy is a great HTTP/2 server written in Go that you can set up rather easily on MacOS to serve static assets over localhost. This is a quick how-to showing how I personally have it set up for development/testing purposes.
+Install It I use Homebrew to install such things:
+brew install caddy This will install Caddy, but won&amp;rsquo;t create a configuration file for it. By default, Caddy will serve HTTP assets in the directory you start it from if you do so in the foreground, but since I wanted this always running as a service, I needed to create a simple configuration file and use brew services to automate loading it with MacOS&#39; launchctl.</description>
+    </item>
+    
+    <item>
+      <title>Hackintosh: How to find out what motherboard model you have (2018)</title>
+      <link>https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/</link>
+      <pubDate>Thu, 11 Jun 2020 08:15:59 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/</guid>
+      <description>Hackintosh enthusiasts often have to fix small but important missing or malfunctioning features of their OS after they get their first successful build, and key to that is knowing your hardware. And instead of being outright lied to by MacOS and its built-in tools, I&amp;rsquo;ll show you how one terminal command can help you get the truth.
+Let&amp;rsquo;s get straight to it:
+$ ioreg -rc FakeSMCKeyStore +-o FakeSMCKeyStore &amp;lt;class FakeSMCKeyStore, id 0x100000128, registered, matched, active, busy 0 (1 ms), retain 13&amp;gt; { &amp;quot;IOProbeScore&amp;quot; = 0 &amp;quot;CFBundleIdentifier&amp;quot; = &amp;quot;org.</description>
+    </item>
+    
+    <item>
+      <title>Deleting a Windows 10 Storage Space Using PowerShell (2018)</title>
+      <link>https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/</link>
+      <pubDate>Thu, 11 Jun 2020 08:15:16 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/</guid>
+      <description>If you tried to delete a Storage Space via the built-in Windows GUI and it just hangs forever, try this PowerShell method for quickly deleting it so you can re-use your drives.
+I recently set up a Windows 10 Storage Space - basically a built-in software RAID - and realized the performance was horrible, so I went to delete it. But the GUI just sat there and hung for hours, with no progress and no errors reported.</description>
+    </item>
+    
+    <item>
+      <title>wget: Download entire directories over HTTP (2018)</title>
+      <link>https://jah.io/posts/wget-download-entire-directories-over-http-2018/</link>
+      <pubDate>Thu, 11 Jun 2020 08:14:40 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/wget-download-entire-directories-over-http-2018/</guid>
+      <description>Say you want to download everything in a certian directory that&amp;rsquo;s shown via HTTP (like nginx directory listing). wget can help you get the job done.
+For example, let&amp;rsquo;s say you have http://somehost/ISO/, and in that directory are subdirectories for linux, bsd, and windows.
+/ISO - /linux - /bsd - /windows - index.html And let&amp;rsquo;s say that inside linux are several Linux distribution ISOs, same with bsd and windows contains ISOs for multiple versions of Windows.</description>
+    </item>
+    
+    <item>
+      <title>Development Platform Considerations: WSL vs. MacOS (2017)</title>
+      <link>https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/</link>
+      <pubDate>Thu, 11 Jun 2020 08:14:07 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/</guid>
+      <description>For over a year now, my development environment has been a mix of Microsoft&amp;rsquo;s Windows Subsystem for Linux, and the more often-used (at least in my industry) MacOS environment. Each has its virtues, and each has problems. This article discusses reasons for switching away from MacOS, the differences between the two development platforms, and compares and contrasts developer tools available for each.
+Apple&amp;rsquo;s MacOS: The Gold Standard In my &amp;ldquo;industry&amp;rdquo; (really, a small slice of the overall &amp;ldquo;developer/devops&amp;rdquo; community that usually works with technologies like Ruby, Linux, Chef, maybe some Python, etc.</description>
+    </item>
+    
+    <item>
+      <title>(Video) Co-Presenting Trailblazer with Nick Sutterer (2015)</title>
+      <link>https://jah.io/posts/video-co-presenting-trailblazer-with-nick-sutterer-2015/</link>
+      <pubDate>Thu, 11 Jun 2020 08:01:39 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/video-co-presenting-trailblazer-with-nick-sutterer-2015/</guid>
+      <description>While at Railsconf 2015 I was fortunate to have the opportunity to co-present on Trailblazer, a new way to structure Ruby on Rails applications, with its creator, Nick Sutterer.
+Nick is a great guy, and a lot of fun to work with. For some reason he and I get along famously well, and Engine Yard asked us to co-present that year. In this presentation, Nick explains the &amp;ldquo;why&amp;rdquo; of Trailblazer, and I show the audience an application built with Nick&amp;rsquo;s framework.</description>
+    </item>
+    
+    <item>
+      <title>(Video) App Server Arena: Comparing Ruby Application Servers (2013)</title>
+      <link>https://jah.io/posts/video-app-server-arena-comparing-ruby-application-servers-2013/</link>
+      <pubDate>Thu, 11 Jun 2020 07:59:26 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/video-app-server-arena-comparing-ruby-application-servers-2013/</guid>
+      <description>I had the privilege of presenting at Lonestar Ruby Conference in 2013 on the topic of Ruby application servers. To many Ruby developers, this may sound like a rather esoteric and useless topic, but as I show in this presentation, your choice of application server can have a profound impact on how your application behaves in production. This talk specifically examines four application servers: Thin, Puma, Passenger and Unicorn.
+https://www.youtube.com/embed/jgLASW2jYhI</description>
+    </item>
+    
+    <item>
+      <title>(Video) Rails 4: Changes and New Features (2013)</title>
+      <link>https://jah.io/posts/video-rails-4-changes-and-new-features-2013/</link>
+      <pubDate>Thu, 11 Jun 2020 07:57:17 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/video-rails-4-changes-and-new-features-2013/</guid>
+      <description>Ruby on Rails version 4 released, by total luck, the very same day I gave this presentation at &amp;ldquo;Austin on Rails&amp;rdquo;, a local Ruby on Rails meetup in Austin, TX. This presentation covers tons of changes and features between versions 3 and 4 of the popular web application framework.
+Link to the video on YouTube
+This presentation is also accompanied by a two-part series I wrote for Engine Yard; it seems that their migration to a new blog platform has mangled the formatting, but the information is nonetheless available at the Engine Yard blog as well as PDF documents I&amp;rsquo;ve made from said blog in the event Engine Yard no longer hosts the content.</description>
+    </item>
+    
+    <item>
+      <title>New Relic Request Queueing (2013)</title>
+      <link>https://jah.io/posts/new-relic-request-queueing-2013/</link>
+      <pubDate>Thu, 11 Jun 2020 07:55:52 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/new-relic-request-queueing-2013/</guid>
+      <description>New Relic&amp;rsquo;s &amp;ldquo;Request Queuing&amp;rdquo; metric is an often misunderstood and badly named figure that often confuses and worries application developers and DevOps engineers. In 2013, after receiving the umpteenth support request worried about this metric while working with Engine Yard&amp;rsquo;s Application Support team, I took some time and wrote this guide to show how request queueing is actually request latency, and does not indicate that your application server has its request queue backed up, but instead that this is the difference in time between front-end proxy and the execution of the New Relic Agent code in your app.</description>
+    </item>
+    
+    <item>
+      <title>New Features in Rails 3.1 (2011)</title>
+      <link>https://jah.io/posts/new-features-in-rails-3-1-2011/</link>
+      <pubDate>Thu, 11 Jun 2020 07:55:17 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/new-features-in-rails-3-1-2011/</guid>
+      <description>This article was originally published at the now-defunct &amp;ldquo;H-Online&amp;rdquo; (a British subsidiary of a German technology publication) and covers new features in the popular Ruby on Rails web application framework that debuted as part of the version 3.1 release.
+Original Location
+ Archived PDF: Page 1 Archived PDF: Page 2 Archived PDF: Page 3  </description>
+    </item>
+    
+    <item>
+      <title>From Rails 2.3 to 3.0 (2011)</title>
+      <link>https://jah.io/posts/from-rails-2-3-to-3-0-2011/</link>
+      <pubDate>Thu, 11 Jun 2020 07:54:49 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/from-rails-2-3-to-3-0-2011/</guid>
+      <description>Originally published at the now-defunct &amp;ldquo;H-Online&amp;rdquo; (a British subsidiary of a German technology publication), this article describes changes in the very popular Ruby on Rails web application framework going from version 2.3 to version 3.0.
+Original Location
+ Archived PDF: Page 1 Archived PDF: Page 2 Archived PDF: Page 3  </description>
+    </item>
+    
     <item>
       <title>Moving to Hugo</title>
       <link>https://jah.io/posts/moving-to-hugo/</link>

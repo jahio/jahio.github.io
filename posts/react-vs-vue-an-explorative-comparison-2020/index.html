@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>React vs. Vue: An Explorative Comparison (2020) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I recently wrote an article for Josh Software, a software consultancy that I began working for in April of this year. It&amp;rsquo;s about the differences between React.js and Vue.js (version 2) and explores those differences from a variety of perspectives for the benefit of front-end developers.
+Coming into the research phase of this article, I hadn&amp;rsquo;t seriously done anything with front-end since the days of Netscape Navigator! I&amp;rsquo;ve of course kept up with changes over the years, but I haven&amp;rsquo;t really worked in front end exclusively or heavily since the mid to late 2000&amp;rsquo;s." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="React vs. Vue: An Explorative Comparison (2020)">
+<meta property="og:description" content="I recently wrote an article for Josh Software, a software consultancy that I began working for in April of this year. It&amp;rsquo;s about the differences between React.js and Vue.js (version 2) and explores those differences from a variety of perspectives for the benefit of front-end developers.
+Coming into the research phase of this article, I hadn&amp;rsquo;t seriously done anything with front-end since the days of Netscape Navigator! I&amp;rsquo;ve of course kept up with changes over the years, but I haven&amp;rsquo;t really worked in front end exclusively or heavily since the mid to late 2000&amp;rsquo;s." />
+<meta property="og:url" content="https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+  <meta property="article:section" content="javascript" />
+
+  <meta property="article:section" content="reactjs" />
+
+  <meta property="article:section" content="vuejs" />
+
+  <meta property="article:section" content="frontend" />
+
+
+  <meta property="article:published_time" content="2020-06-11 08:19:36 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/">React vs. Vue: An Explorative Comparison (2020)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://jah.io/tags/javascript/">javascript</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/reactjs/">reactjs</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/vuejs/">vuejs</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/frontend/">frontend</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>I recently wrote an article for <a href="http://www.joshsoftware.com/">Josh Software</a>, a software consultancy that I began working for in April of this year. It&rsquo;s about the differences between React.js and Vue.js (version 2) and explores those differences from a variety of perspectives for the benefit of front-end developers.</p>
+<p>Coming into the research phase of this article, I hadn&rsquo;t <em>seriously</em> done anything with front-end since the days of <a href="https://en.wikipedia.org/wiki/Netscape_Navigator">Netscape Navigator</a>! I&rsquo;ve of course kept up with changes over the years, but I haven&rsquo;t really worked in front end exclusively or heavily since the mid to late 2000&rsquo;s. Since that point in time I&rsquo;ve been building APIs, cloud and server automation, and designing databases - not making pretty things. This project was a refreshing change of pace that piqued my interest.</p>
+<p>In short, there&rsquo;s no clear &ldquo;X is better than Y&rdquo; argument between these two technologies that makes any sense to an adult/seasoned developer whatsoever. There are ways in which React is definitely better positioned than Vue, but jumping to using React based purely on the comparisons for those specific factors is definitely jumping the gun. You&rsquo;d be missing out on a lot of really great features that Vue brings to the table.</p>
+<p>While as of this writing I haven&rsquo;t yet built even a small (full) app in React, I have done so with Vue.js, and I found Vue to be a very easy to use framework (whereas React is more of a <em>library</em>). Vue handles concerns like routing, UI rendering, and state management pretty-much out of the box, whereas React only handles one of those all the way, one some of the way and has zero facility for the third (that being routing). This makes it more complex to use because now you have to introduce at least one additional library with a DSL that has nothing to do with React (at least not necessarily), and this of course requires you to <em>know</em> about that library, whatever it is, ahead of time, meaning that a person like me, coming from a strictly back-end background, wouldn&rsquo;t really know what library to reach for in this case (turns out for state management you want Redux, and for routing you want react-router).</p>
+<p>You can see the original post on the Josh Software blog <a href="https://blog.joshsoftware.com/2020/05/06/react-vs-vue-js-an-explorative-comparison/">here</a>, and I&rsquo;ve captured a PDF for long-term preservation and uploaded it to my blog <a href="https://github.com/jahio/jahio.github.io/blob/master/assets/pdf/react-vs-vue.pdf">here</a>.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/">
+                <span class="button__text">Fixing Safari&#39;s Cache With Vue.js (Developer Mode) (2020)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

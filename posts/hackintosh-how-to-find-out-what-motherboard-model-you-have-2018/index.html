@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hackintosh: How to find out what motherboard model you have (2018) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hackintosh enthusiasts often have to fix small but important missing or malfunctioning features of their OS after they get their first successful build, and key to that is knowing your hardware. And instead of being outright lied to by MacOS and its built-in tools, I&amp;rsquo;ll show you how one terminal command can help you get the truth.
+Let&amp;rsquo;s get straight to it:
+$ ioreg -rc FakeSMCKeyStore &#43;-o FakeSMCKeyStore &amp;lt;class FakeSMCKeyStore, id 0x100000128, registered, matched, active, busy 0 (1 ms), retain 13&amp;gt; { &amp;quot;IOProbeScore&amp;quot; = 0 &amp;quot;CFBundleIdentifier&amp;quot; = &amp;quot;org." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hackintosh: How to find out what motherboard model you have (2018)">
+<meta property="og:description" content="Hackintosh enthusiasts often have to fix small but important missing or malfunctioning features of their OS after they get their first successful build, and key to that is knowing your hardware. And instead of being outright lied to by MacOS and its built-in tools, I&amp;rsquo;ll show you how one terminal command can help you get the truth.
+Let&amp;rsquo;s get straight to it:
+$ ioreg -rc FakeSMCKeyStore &#43;-o FakeSMCKeyStore &amp;lt;class FakeSMCKeyStore, id 0x100000128, registered, matched, active, busy 0 (1 ms), retain 13&amp;gt; { &amp;quot;IOProbeScore&amp;quot; = 0 &amp;quot;CFBundleIdentifier&amp;quot; = &amp;quot;org." />
+<meta property="og:url" content="https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-06-11 08:15:59 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/">Hackintosh: How to find out what motherboard model you have (2018)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p><a href="https://en.wikipedia.org/wiki/Hackintosh">Hackintosh</a> enthusiasts often have to fix small but important missing or malfunctioning features of their OS after they get their first successful build, and key to that is <em>knowing your hardware.</em> And instead of being outright lied to by MacOS and its built-in tools, I&rsquo;ll show you how one terminal command can help you <strong>get the truth.</strong></p>
+<p>Let&rsquo;s get straight to it:</p>
+<pre><code>$ ioreg -rc FakeSMCKeyStore
++-o FakeSMCKeyStore  &lt;class FakeSMCKeyStore, id 0x100000128, registered, matched, active, busy 0 (1 ms), retain 13&gt;
+    {
+      &quot;IOProbeScore&quot; = 0
+      &quot;CFBundleIdentifier&quot; = &quot;org.netkas.driver.FakeSMC&quot;
+      &quot;IOMatchCategory&quot; = &quot;FakeSMCKeyStore&quot;
+      &quot;IOClass&quot; = &quot;FakeSMCKeyStore&quot;
+      &quot;IOProviderClass&quot; = &quot;IOResources&quot;
+      &quot;manufacturer&quot; = &quot;ASUS&quot;
+      &quot;product-name&quot; = &quot;Z97-AR&quot;
+      &quot;IOUserClientClass&quot; = &quot;FakeSMCKeyStoreUserClient&quot;
+      &quot;IOResourceMatch&quot; = &quot;IOKit&quot;
+    }
+
+$
+
+</code></pre><p>Jackpot.</p>
+<blockquote>
+<p>Whoa whoa whoa what?</p>
+</blockquote>
+<p>Without making this a huge <em>thing</em> on the SMC and UEFI and spoofing it and all that, in a nutshell we&rsquo;re using an open-source kernel extension to give us REAL information about our hardware. Since we loaded <a href="https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek">FakeSMC</a> at boot as a kernel extension, that same kernel module is now loaded and running.</p>
+<blockquote>
+<p>Why not just open up the case and look around?</p>
+</blockquote>
+<p>Basically, because <em>I got pissed off.</em>  <a href="http://nasa.gov/">NASA</a> put a dude <em>on the MOON before I was born</em>. How the hell is it we can&rsquo;t, 49 years later on one of the best operating systems in existence, not get some basic information with that software?</p>
+<blockquote>
+<p>What was wrong with <code>sysctl</code> and <code>system_profiler</code>?</p>
+</blockquote>
+<p>Well, <code>sysctl</code> can&rsquo;t really tell you much about your computer other than your processor:</p>
+<pre><code>$ sysctl -n machdep.cpu.brand_string
+Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+$
+
+</code></pre><p>Which, yeah that&rsquo;s&hellip;kind of useful. Maybe. But as far as I can tell, it won&rsquo;t give you anything else that&rsquo;s clear and useful in making an inventory of what&rsquo;s <em>actually</em> in your damn computer.</p>
+<p>Which brings me to one baby seal I&rsquo;d like to club: <code>system_profiler</code></p>
+
+  <figure class="left" >
+    <img src="https://github.com/jahio/jahio.github.io/raw/master/assets/bad-jokes-so-a-baby-seal-walks-into-a-club-977561.png"   />
+    
+  </figure>
+
+
+<p>This is basically a command-line version of the native, Apple-created desktop app similarly named (<code>/Applications/Utilities/System Information.app</code>). While you can get <em>some</em> useful hardware information out of that app, the crucial data you need to profile your system comes from the SMBIOS settings you&rsquo;ve configured (likely through something like <a href="https://mackie100projects.altervista.org/download-clover-configurator/">Clover Configurator</a>), which you&rsquo;d only do <em>to get compatibility with essentially the same hardware</em>.</p>
+<p>Common sense 101: Don&rsquo;t tell me what I already know; I&rsquo;m the one who told it to you!</p>
+<p>This is why <code>ioreg</code>, talking to the aforementioned kernel extension, is so useful.</p>
+<hr>
+<p>On Linux, we have <code>/proc</code> and <code>/sys</code>. On BSD you can access <code>/kern</code>. On Windows there are a plethora of open source, free, GPL-licensed tools (that are even still maintained!) to do the same thing. Why the hell should MacOS be any different?</p>
+<p>Apple, I&rsquo;m not happy with you. <strong>Shit like this is WHY people are Hackintoshing.</strong></p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/serving-static-assets-over-localhost-http-with-caddy-2018/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Serving Static Assets Over localhost HTTP with Caddy (2018)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/">
+                <span class="button__text">Deleting a Windows 10 Storage Space Using PowerShell (2018)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

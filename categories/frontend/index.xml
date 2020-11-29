@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>frontend on J. Austin Hughey: Developer Notebook</title>
+    <link>https://jah.io/categories/frontend/</link>
+    <description>Recent content in frontend on J. Austin Hughey: Developer Notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2020 J. Austin Hughey</copyright>
+    <lastBuildDate>Thu, 11 Jun 2020 08:19:36 +0000</lastBuildDate><atom:link href="https://jah.io/categories/frontend/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React vs. Vue: An Explorative Comparison (2020)</title>
+      <link>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</link>
+      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</guid>
+      <description>I recently wrote an article for Josh Software, a software consultancy that I began working for in April of this year. It&amp;rsquo;s about the differences between React.js and Vue.js (version 2) and explores those differences from a variety of perspectives for the benefit of front-end developers.
+Coming into the research phase of this article, I hadn&amp;rsquo;t seriously done anything with front-end since the days of Netscape Navigator! I&amp;rsquo;ve of course kept up with changes over the years, but I haven&amp;rsquo;t really worked in front end exclusively or heavily since the mid to late 2000&amp;rsquo;s.</description>
+    </item>
+    
+    <item>
+      <title>Fixing Safari&#39;s Cache With Vue.js (Developer Mode) (2020)</title>
+      <link>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</link>
+      <pubDate>Thu, 11 Jun 2020 08:19:10 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</guid>
+      <description>I happen to like Apple&amp;rsquo;s Safari browser, and I&amp;rsquo;d like to use it when developing stuff with Vue.js. I ran into a problem with this, however: Safari would cache the response from the live-reload development server on localhost, so that when I made changes it didn&amp;rsquo;t update, even when hitting the reload button. I think I&amp;rsquo;ve solved this though with a Cache-Control header configued in the project&amp;rsquo;s vue.config.js file.
+tl;dr Put this in a file at project root called vue.</description>
+    </item>
+    
+  </channel>
+</rss>

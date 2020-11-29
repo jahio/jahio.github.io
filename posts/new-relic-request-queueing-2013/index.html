@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>New Relic Request Queueing (2013) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="New Relic&amp;rsquo;s &amp;ldquo;Request Queuing&amp;rdquo; metric is an often misunderstood and badly named figure that often confuses and worries application developers and DevOps engineers. In 2013, after receiving the umpteenth support request worried about this metric while working with Engine Yard&amp;rsquo;s Application Support team, I took some time and wrote this guide to show how request queueing is actually request latency, and does not indicate that your application server has its request queue backed up, but instead that this is the difference in time between front-end proxy and the execution of the New Relic Agent code in your app." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/new-relic-request-queueing-2013/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="New Relic Request Queueing (2013)">
+<meta property="og:description" content="New Relic&amp;rsquo;s &amp;ldquo;Request Queuing&amp;rdquo; metric is an often misunderstood and badly named figure that often confuses and worries application developers and DevOps engineers. In 2013, after receiving the umpteenth support request worried about this metric while working with Engine Yard&amp;rsquo;s Application Support team, I took some time and wrote this guide to show how request queueing is actually request latency, and does not indicate that your application server has its request queue backed up, but instead that this is the difference in time between front-end proxy and the execution of the New Relic Agent code in your app." />
+<meta property="og:url" content="https://jah.io/posts/new-relic-request-queueing-2013/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-06-11 07:55:52 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/new-relic-request-queueing-2013/">New Relic Request Queueing (2013)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>New Relic&rsquo;s &ldquo;Request Queuing&rdquo; metric is an often misunderstood and badly named figure that often confuses and worries application developers and DevOps engineers. In 2013, after receiving the umpteenth support request worried about this metric while working with <a href="http://www.engineyard.com/">Engine Yard</a>&rsquo;s Application Support team, I took some time and wrote this guide to show how request queueing is actually request <em>latency</em>, and does <em>not</em> indicate that your application server has its request queue backed up, but instead that this is the difference in time between front-end proxy and the execution of the New Relic Agent code in your app.</p>
+<p><a href="https://www.engineyard.com/blog/new-relic-queuing">Understanding New Relic Queuing: Engine Yard Blog</a> (<a href="https://github.com/jahio/jahio.github.io/blob/master/assets/pdf/new-relic-request-queue.pdf">PDF</a>)</p>
+<p>(PDF is self-hosted in the event Engine Yard discontinues this article or their past blog posts.)</p>
+<p>Request queuing in New Relic is often misinterpreted as &ldquo;there&rsquo;s a bunch of unserved HTTP requests from users piled up in the (Puma/Thin/Unicorn/Passenger) queue! Oh no!&rdquo;. Thankfully - and somewhat confusingly - that&rsquo;s not the case at all. At Engine Yard, we added a custom header to <a href="http://nginx.org/">nginx</a> that would mark the point in time when nginx itself received the HTTP request. This is after it&rsquo;s been routed from the user, across the internet, to the first entry point of an application (wherever your A or AAAA record sticks to), and through the load balancer (in our case, <a href="http://haproxy.com/">haproxy</a>), and finally to nginx. Then, as the request was processed by the application server in use - whatever it may have been - New Relic&rsquo;s agent code in your application would look for this header and subtract the time difference between then, and the point in time it executed that code. Hence, this isn&rsquo;t a queue at all, it&rsquo;s <em>latency</em>.</p>
+<p>The article goes into more detail and shows you how you can use various tools for both <a href="http://phusionpassenger.com/">Phusion Passenger</a> and <a href="http://unicorn.bogomips.org/">Unicorn</a> - the latter requiring some custom code that I&rsquo;ve distilled into a tool - to find out how many requests are <strong>ACTUALLY</strong> piled up under the hood in the global request queue.</p>
+<p>The resulting tool for checking Unicorn request queue (for real), <a href="https://github.com/jahio/unicorn-status">unicorn_status.rb</a>, was a joint effort between myself, <a href="https://github.com/omgitsads">Adam Holt</a>, and <a href="https://github.com/crigor">Christopher Rigor</a>.</p>
+<p>People using <a href="http://phusion.nl/">Phusion</a>&rsquo;s excellent <a href="http://phusionpassenger.com/">Passenger</a> application server can get this information much easier: simply run <code>passenger-status</code> on the VM that&rsquo;s processing your application&rsquo;s requests.</p>
+<h2 id="how-is-request-_latency_-useful">How is request <em>latency</em> useful?<a href="#how-is-request-_latency_-useful" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>If this figure gets unreasonably high (what&rsquo;s &ldquo;unreasonable&rdquo; depends on your application and architecture, but in general up to around ~50-100ms of latency is &ldquo;normal&rdquo;) it could be a signal that something is getting between your reverse proxy (e.g. nginx) and your application&rsquo;s ability to process request code.</p>
+<p>Here&rsquo;s a non-exhaustive summary list of possible causes when you&rsquo;re seeing high request <strong>latency</strong> in your application environment:</p>
+<ul>
+<li>Slow actions running as a &ldquo;filter&rdquo; before or around each request (e.g. <code>before_filter</code> in Rails);</li>
+<li>Database queries that aren&rsquo;t optimized or have no indexes - perhaps introducing a memory cache could help;</li>
+<li>Is the application server itself restarting or killing/respawning workers rather often? Check application server logs and system logs for memory consumption and <code>OOM</code> (&ldquo;out of memory&rdquo;) events;</li>
+<li>Are there network-level requests to external resources that happen as part of the request? (Think microservices, etc.) Consider an out-of-band worker to fetch once and cache for ~5 minutes or whatever&rsquo;s appropriate;</li>
+<li>Is your application CPU intensive or running on underpowered hardware? Consider a vertical upgrade;</li>
+<li>Is the VM your application runs on (or the fleet of VMs) pushing swap? <code>free -m</code> will show you if swap is being used and if it is, free up some memory or upgrade total memory capacity;</li>
+<li>This is because, when a server needs and/or accesses swap, disk i/o - the speed at which a disk can read and/or write data - can be a huge bottleneck, even on solid state drives.</li>
+<li>Check your overall database performance; are indexes properly utilized (or are you missing any?) Database triggers happening unnecessarily? Is the DB server itself just plain hammered under load (e.g. BI reporting tools running)? Consider setting up a replica and conducting reads from it exclusively for things like reporting and/or long running processing tasks.</li>
+</ul>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/video-rails-4-changes-and-new-features-2013/">
+                <span class="button__icon">←</span>
+                <span class="button__text">(Video) Rails 4: Changes and New Features (2013)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/new-features-in-rails-3-1-2011/">
+                <span class="button__text">New Features in Rails 3.1 (2011)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

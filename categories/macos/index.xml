@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macos on J. Austin Hughey: Developer Notebook</title>
+    <link>https://jah.io/categories/macos/</link>
+    <description>Recent content in macos on J. Austin Hughey: Developer Notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2020 J. Austin Hughey</copyright>
+    <lastBuildDate>Thu, 11 Jun 2020 08:17:37 +0000</lastBuildDate><atom:link href="https://jah.io/categories/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ld: library not found for -lssl after updating XCode (2019)</title>
+      <link>https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:17:37 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/ld-library-not-found-for-lssl-after-updating-xcode-2019/</guid>
+      <description>I recently updated XCode on my MacOS Mojave hackintosh, and to my surprise thereafter, was unable to install a version of the MySQL2 gem for a project I was working on. The solution ultimately was to install a package I didn&amp;rsquo;t know existed.
+When upgrading to a slightly newer version of Ruby for a (somewhat legacy) project I was working on, I had to re-bundle to reinstall gems. One of those was mysql2.</description>
+    </item>
+    
+    <item>
+      <title>Using dd to Create OS Installation Disks (USB) (2019)</title>
+      <link>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:16:58 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</guid>
+      <description>When creating OS installation media, a lot of people suggest using various third party tools, such as Etcher and others. However, it&amp;rsquo;s fairly easy just using dd (Data Dump) on any Unix-like OS to do the same thing.
+Zero Out the Disk Insert a USB stick and identify its appropriate name under /dev/. For MacOS, you can try diskutil list - just identify the disk that wasn&amp;rsquo;t there before you inserted your USB stick.</description>
+    </item>
+    
+  </channel>
+</rss>

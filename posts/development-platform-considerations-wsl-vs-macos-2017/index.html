@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Development Platform Considerations: WSL vs. MacOS (2017) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="For over a year now, my development environment has been a mix of Microsoft&amp;rsquo;s Windows Subsystem for Linux, and the more often-used (at least in my industry) MacOS environment. Each has its virtues, and each has problems. This article discusses reasons for switching away from MacOS, the differences between the two development platforms, and compares and contrasts developer tools available for each.
+Apple&amp;rsquo;s MacOS: The Gold Standard In my &amp;ldquo;industry&amp;rdquo; (really, a small slice of the overall &amp;ldquo;developer/devops&amp;rdquo; community that usually works with technologies like Ruby, Linux, Chef, maybe some Python, etc." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Development Platform Considerations: WSL vs. MacOS (2017)">
+<meta property="og:description" content="For over a year now, my development environment has been a mix of Microsoft&amp;rsquo;s Windows Subsystem for Linux, and the more often-used (at least in my industry) MacOS environment. Each has its virtues, and each has problems. This article discusses reasons for switching away from MacOS, the differences between the two development platforms, and compares and contrasts developer tools available for each.
+Apple&amp;rsquo;s MacOS: The Gold Standard In my &amp;ldquo;industry&amp;rdquo; (really, a small slice of the overall &amp;ldquo;developer/devops&amp;rdquo; community that usually works with technologies like Ruby, Linux, Chef, maybe some Python, etc." />
+<meta property="og:url" content="https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-06-11 08:14:07 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/development-platform-considerations-wsl-vs-macos-2017/">Development Platform Considerations: WSL vs. MacOS (2017)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>For over a year now, my development environment has been a mix of Microsoft&rsquo;s <a href="https://blogs.msdn.microsoft.com/wsl/">Windows Subsystem for Linux</a>, and the more often-used (at least in my industry) <a href="https://www.apple.com/macos/high-sierra/">MacOS</a> environment. Each has its virtues, and each has problems. This article discusses reasons for switching <em>away</em> from MacOS, the differences between the two development platforms, and compares and contrasts developer tools available for each.</p>
+<h2 id="apples-macos-the-gold-standard">Apple&rsquo;s MacOS: The Gold Standard<a href="#apples-macos-the-gold-standard" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>In my &ldquo;industry&rdquo; (really, a small slice of the overall &ldquo;developer/devops&rdquo; community that usually works with technologies like Ruby, Linux, Chef, maybe some Python, etc.), the vast majority of developers seem to gravitate toward the typical Macbook Pro laptop, and thus the officially-sanctioned MacOS operating system. As most people are aware, buying an Apple computer is usually going to cost you a significant amount more than an equivalently-built PC. In the past, though, this has been totally worth it: for the money you pay you get what I still believe is <em>the best operating system on the planet</em>, dependable hardware, and a warranty that actually means something.</p>
+<p>What you don&rsquo;t get anymore, however, is <em>modern hardware</em>.</p>
+<h3 id="apple-abandons-professional-users">Apple Abandons Professional Users<a href="#apple-abandons-professional-users" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Recent releases of the MacBook Pro (and other Apple laptops) have received <a href="https://en.wikipedia.org/wiki/MacBook_Pro#Reception_4">mixed reviews</a> at best, and many people in the professional user market - not just developers, but graphic designers, 3D artists, and video editors have criticized Apple&rsquo;s failure to add meaningfully-powerufl hardware to their laptop lineup since roughly <em>2013</em>.</p>
+<p>Apple generates over <strong>four times the revenue</strong> from the iPhone product line than from the Mac product line. <a href="http://www.businessinsider.com/apple-q4-earnings-2017-11">These figures from businessinsider.com</a> show Q4 2017 iPhone revenue exceeding $28 billion - dwarfing the only $7 billion coming from Apple&rsquo;s Mac product line.</p>
+<p>With such a rift in revenue streams, it&rsquo;s no wonder Apple has, as many critics and former enthusiasts claim, abandoned the professional user who relies on the Mac computer product line. Apple has responded by adding features to its latest MacOS release, High Sierra, that support the use of <a href="https://developer.apple.com/development-kit/external-graphics/">external GPUs over Thunderbolt 3</a>. This may satisfy <em>some</em> professional users, but others will still demand more from Apple&rsquo;s expensively-priced personal computer product line.</p>
+<p>Like many professional Apple users, I saw this coming and still remain very skeptical as to whether or not Apple will continue to innovate - or even care - about their personal computer product line. From a strictly financial standpoint, I can&rsquo;t fault them whatsoever for doubling down on the iPhone, shifting internal resources and focus away from the less-profitable product lines like the Mac. But as a professional user, who needs a dependable computer from Apple because it&rsquo;s the only supported, &ldquo;legal&rdquo; way to use MacOS, this trend has me worried.</p>
+<p>I&rsquo;m far from the only person who&rsquo;s seen this coming, or who&rsquo;s skeptical on the future viability of the Mac product line. As such, I started thinking about ways to utilize MacOS <em>without</em> being subjected to buying a glorified abacus. And while building a &ldquo;hackintosh&rdquo; or finding ways to safely virtualize MacOS on a Windows 10 or Linux host (that don&rsquo;t break and/or compromise the hypervisor itself) are valid approaches for those who are willing to accept the risk or spend the time on it, I wanted something better, more &ldquo;pure&rdquo;.</p>
+<h2 id="enter-windows-subsystem-for-linux">Enter Windows Subsystem for Linux<a href="#enter-windows-subsystem-for-linux" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Earlier this year, Microsoft released a new feature for its Windows 10 operating system, called &ldquo;Windows Subsystem for Linux&rdquo;. This is an additional feature you can enable in certain versions of Windows that will install features directly into the Windows kernel that are direct impementations of, or shims that delegate to equivalent, native Linux kernel syscalls.</p>
+<p>So for example, if a natively-compiled Linux binary makes &ldquo;write&rdquo; system call, thinking that it&rsquo;s running natively on Linux, the Windows kernel will intercept and handle that syscall as if it <strong>actually is</strong> the Linux kernel.</p>
+<p>This enables Microsoft to install a Linux &ldquo;subsystem&rdquo; - not a full operating system, and not virtualized - directly on the user&rsquo;s computer. The installed binaries are the  <strong>exact same binaries Ubuntu users get via <code>apt</code> and come directly from Canonical&rsquo;s repository - NO CHANGES.</strong></p>
+<p>With this feature available for people using Windows, development of things like Ruby apps - compiling extensions natively - are no longer such a hassle. <em>This means they no longer &ldquo;must&rdquo; have MacOS!</em></p>
+<h3 id="but-is-it-as-good-as-macos">But is it as good as MacOS?<a href="#but-is-it-as-good-as-macos" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Leaving issues of user interface design and aesthetics aside, Windows 10 is a perfectly capable and stable operating system. It&rsquo;s fully capable of being used as your &ldquo;daily driver&rdquo; for Ruby/Chef/Python/Go/Elixir/etc. development from a technical standpoint, but unlike MacOS, suffers from a lack of well-designed, maintained and useful development tools.</p>
+<h2 id="developer-tools-make-the-difference">Developer Tools Make the Difference<a href="#developer-tools-make-the-difference" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The biggest problem using Windows Subsystem for Linux is the lack of a good set of development tools. On MacOS we have the excellent <a href="https://www.iterm2.com/">iTerm2</a>; on Windows, the ecosystem is fragmented, the options appear many but are mostly outdated, and the available console replacements (as the regular Windows terminal doesn&rsquo;t even do tabs, let alone all the other advanced stuff you get with iTerm2) suffer from hacks that are necessary due to the design of various parts of the Windows API, way too many configuration options, and a desire to be &ldquo;all things to all people&rdquo; that comes out in the design, workflow, and general usability of terminal replacement tools on the Windows platform.</p>
+<p>There are, however, some nascent projects that seek to alleviate this problem by providing a solid terminal replacement, complete with first-rate features, in a platform-agnostic way. Take <a href="https://hyper.is/">hyper</a> for example; using GitHub&rsquo;s <a href="https://electron.atom.io/">Electron</a> shell project, it&rsquo;s a somewhat-viable terminal replacement that doesn&rsquo;t suffer from the aforementioned issues, yet does seem a bit slower than a natively-compiled application, and in my personal experience, has a ton of bugs yet to be fixed due to the relative lack of interest and less usage on the Windows platform.</p>
+<p>Other terminal replacement possibilities:</p>
+<ul>
+<li><a href="https://github.com/cbucher/console">ConsoleZ</a></li>
+<li><a href="https://github.com/Terminals-Origin/Terminals">Terminals</a></li>
+<li><a href="https://eugeny.github.io/terminus/">Terminus</a></li>
+<li><a href="https://github.com/jwilm/alacritty">Alacritty</a></li>
+</ul>
+<h3 id="graphics-development">Graphics Development<a href="#graphics-development" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>On MacOS, many people seem to be in love with <a href="https://www.sketchapp.com/">Sketch</a>, a MacOS-exclusive graphics development environment. <a href="http://www.pixelmator.com/">Pixelmator</a> is another long-standing MacOS-exclusive application that provides a very strong competitor to Adobe Photoshop.</p>
+<p>While these tools don&rsquo;t exist on the Windows side of things, my personal favorite, <a href="https://affinity.serif.com/en-us/designer/">Affinity Designer</a> is an affordable alternative to Sketch that runs on both MacOS and Windows. Serif, the publisher of Affinity Designer, also offers Affinity Photo for all your raster-editing needs.</p>
+<p>And there&rsquo;s always, of course, Photoshop. If you&rsquo;re into the whole pay-every-month pricing model thing (personally, not a fan).</p>
+<p>Linux users will likely lament my exclusion of <a href="https://www.gimp.org/">&ldquo;The Gimp&rdquo;</a> here; this is because it&rsquo;s aptly named. I&rsquo;ve rarely seen anyone with any professional design experience willingly utilize &ldquo;The Gimp&rdquo; to create visuals anyone would actually <em>want</em> to look at. That isn&rsquo;t to say it&rsquo;s not possible - it definitely is, no question - but it&rsquo;s very rare some one with real experience in graphics editing will be as efficient or satisfied using The Gimp as they would with the other professional tools mentioned above.</p>
+<h3 id="source-code-management-git-svn">Source Code Management (git, svn)<a href="#source-code-management-git-svn" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>MacOS has a bevy of beautiful, easy-to-use source code management tools, though on the Windows side of things, the picture isn&rsquo;t quite so pretty and the workflow is drastically different depending on what tools you may be using.</p>
+<p>Take for example the excellent <a href="https://www.git-tower.com/">Tower</a> app for managing Git repositories. It was first released on MacOS several years ago, yet just released its first Windows version in 2017. MacOS has long had two great SVN clients: <a href="https://versionsapp.com/">Versions</a> and <a href="https://www.zennaware.com/cornerstone/index.php">Cornerstone</a>. Both sport a refined and useful user interface and have been staples of developers on MacOS working with <a href="https://subversion.apache.org/">Subversion</a> for nearly a decade.</p>
+<p>Windows, on the other hand, suffers from a lack of <em>well-designed</em> equivalent products that <em>are still maintained</em>. Sure, there&rsquo;s <a href="https://tortoisesvn.net/">Tortoise SVN</a> and <a href="https://tortoisegit.org/">Tortoise Git</a>, but both integrate directly with the Windows Explorer experience which can be both confusing and imply a scattered interface, requiring the user to run all over the filesystem with multiple windows open to see what changed. It&rsquo;s also not clear to me if either provides a built-in diff interface (and if so, built-in <em>to what?</em>).</p>
+<p>Thankfully there are a great number of git-friendly GUI applications out there that are cross-platform compatible to varying degrees. The git project website maintains a <a href="https://git-scm.com/downloads/guis">great list of git desktop applications</a> that allow you to filter by operating system: Windows, MacOS, and Linux.</p>
+<h3 id="editors">Editors<a href="#editors" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>MacOS has long been envied as the native platform for the venerable <a href="https://macromates.com/">Textmate</a> editor. Popularized during the rise of the Ruby on Rails framework, even a decade later it still has die-hard users. Its second version is both <a href="https://github.com/textmate/textmate">open source</a> and currently designated &ldquo;beta&rdquo;. Development on the project seems to have stalled, however, as GitHub shows, that as of the date of this writing, the most recent commit to its <code>master</code> branch is August 24.</p>
+<p>There&rsquo;s also the user-friendly <a href="http://panic.com/coda">Coda</a> WYSIWYG editor, providing a purely graphical way to assemble an HTML-based interface, complete with the ability to work with CSS and Javascript. It also provides a source-code view that allows the user to edit source code by hand and see changes reflected in real time. The only equivalent Windows application I know of is Adobe&rsquo;s Dreamweaver - a project they acquired with the Macromedia acquisition so many years ago. Neither product is open source or free of charge, but Coda is certainly more affordable over the long term, given Adobe&rsquo;s &ldquo;monthly rental&rdquo; style licensing is the only option available for purchase.</p>
+<p>Like Coda, there&rsquo;s also <a href="http://tumult.com/hype/">Hype</a>, an advanced editor aimed toward HTML5 animation and complex static site and/or interface development. It seems to have more features than Coda, but also appears more complex and geared more toward professional front-end designers and developers for the creation of standards-compliant infographics, interactive interfaces, and the like. I&rsquo;m aware of nothing even remotely similar on Windows or Linux.</p>
+<p>Thankfully for Windows users, projects like GitHub&rsquo;s <a href="http://atom.io/">Atom</a> editor and Microsoft&rsquo;s <a href="http://code.visualstudio.com/">Visual Studio Code</a> are both free, cross-platform (including Linux) editors that are extremely veratile, easy-to-use, and have large, thriving developer communities, creating useful extensions for both.</p>
+<p>There are also editors like <a href="https://www.activestate.com/komodo-ide/downloads/edit">Komodo Edit</a>, <a href="http://brackets.io/">Brackets</a> and <a href="http://sublimetext.com/">Sublime Text</a>, all three of which are available on all three major desktop platforms: Windows, Linux and MacOS.</p>
+<h3 id="diff-tools">Diff Tools<a href="#diff-tools" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>While there doesn&rsquo;t appear to be a large <em>quantity</em> of diff tools available on MacOS, the sheer <em>quality</em> of the leading tool I know of is unparalleled. <a href="https://www.kaleidoscopeapp.com/">Kaleidoscope</a> is by far the best designed and most useful diff tool I&rsquo;ve ever seen or used. I&rsquo;m aware of no equivalent within the Windows or Linux worlds, however for most users, a good SCM will include a solid diff tool built into the application, which may be all that&rsquo;s needed. But for diffing larger numbers of documents or things not within source control, Kaleidoscope appears unparalleled.</p>
+<p>You&rsquo;re not totally out of luck on Windows or Linux, however: <a href="http://meldmerge.org/">Meld</a> is a great cross-platform GUI diff tool that&rsquo;s free and open source. Other tools include Beyond Compare, Araxis Merge, and Code Compare, among others. Tobias Günther of fournova has a <a href="https://www.git-tower.com/blog/diff-tools-windows/">great blog entry on the Tower git client website describing your options</a>, including some not mentioned here that I highly recommend.</p>
+<h2 id="what-about-the-console-cli-only-tools">What about the console? CLI-only tools?<a href="#what-about-the-console-cli-only-tools" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>If you&rsquo;re happy with a CLI-only workflow, more power to ya. With the exception of graphics, video and maybe music editing or management needs, it&rsquo;s entirely possible (and to some, preferable) to run your entire development environment inside of various <code>tmux</code> sessions, relying on raw CLI tools like <code>diff</code>, <code>vim</code>, <code>emacs</code>, <code>git</code>, and so on. <strong>You can absolutely leverage all these tools inside Windows Subsystem for Linux just as well as you could/would on MacOS</strong>.</p>
+<h2 id="which-do-you-use">Which do you use?<a href="#which-do-you-use" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>After over a year of mixing both development environments to try to separate myself from the Apple ecosystem, I find myself coming &ldquo;back to the Mac&rdquo;. The tooling available on Windows just isn&rsquo;t there yet, and truth be told, Windows Subsystem for Linux, while a legendary feat of modern software engineering (hey Microsoft, <em>be proud of yourselves here!</em>), still has a way to go. For 90% or more of anyone&rsquo;s use cases, it&rsquo;s great, but things like slow disk I/O (due to emulation necessary to store files on NTFS or ReFS in a Linux-friendly way) and the presence of WSL behind a &ldquo;barrier&rdquo; in userspace (processes in WSL aren&rsquo;t aware of NT processes and vice versa), coupled with advancements that can still be made in operating system integration, Microsoft still needs to do some more work.</p>
+<p>Available tools for Windows that are equivalent in quality and usefulness to their MacOS peers simply don&rsquo;t yet exist for Windows in many cases, which is a real shame. I&rsquo;m hopeful that in the near future this statement will no longer be valid, but for the time being, it&rsquo;s hard finding a well-designed tool (commercial or otherwise) that&rsquo;s equal in quality to MacOS equivalents that are available now and have been, in some cases, for around a decade.</p>
+<p>Microsoft&rsquo;s CEO, <a href="https://twitter.com/satyanadella">Satya Nadella</a>, seems to be in large part to credit with Microsoft&rsquo;s evolution in recent years that embraces Linux and attempts to make Windows the best platform available to develop on, regardless of your project&rsquo;s target platform. I think Mr. Nadella deserves a <em>lot</em> of credit for moving Microsoft past the archaic and draconian views that defined it for over a decade, and I, for one, strongly hope to see continued success for Microsoft as an excellent development platform. The only thing holding it back - just like with its Windows Phone initiative - is a lack of enthusiastic developers building excellent tools and apps for its platform and vision. Here&rsquo;s hoping that changes.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/wget-download-entire-directories-over-http-2018/">
+                <span class="button__icon">←</span>
+                <span class="button__text">wget: Download entire directories over HTTP (2018)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/video-co-presenting-trailblazer-with-nick-sutterer-2015/">
+                <span class="button__text">(Video) Co-Presenting Trailblazer with Nick Sutterer (2015)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

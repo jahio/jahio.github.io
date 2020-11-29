@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Fixing Safari&#39;s Cache With Vue.js (Developer Mode) (2020) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I happen to like Apple&amp;rsquo;s Safari browser, and I&amp;rsquo;d like to use it when developing stuff with Vue.js. I ran into a problem with this, however: Safari would cache the response from the live-reload development server on localhost, so that when I made changes it didn&amp;rsquo;t update, even when hitting the reload button. I think I&amp;rsquo;ve solved this though with a Cache-Control header configued in the project&amp;rsquo;s vue.config.js file.
+tl;dr Put this in a file at project root called vue." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Fixing Safari&#39;s Cache With Vue.js (Developer Mode) (2020)">
+<meta property="og:description" content="I happen to like Apple&amp;rsquo;s Safari browser, and I&amp;rsquo;d like to use it when developing stuff with Vue.js. I ran into a problem with this, however: Safari would cache the response from the live-reload development server on localhost, so that when I made changes it didn&amp;rsquo;t update, even when hitting the reload button. I think I&amp;rsquo;ve solved this though with a Cache-Control header configued in the project&amp;rsquo;s vue.config.js file.
+tl;dr Put this in a file at project root called vue." />
+<meta property="og:url" content="https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+  <meta property="article:section" content="frontend" />
+
+  <meta property="article:section" content="javascript" />
+
+  <meta property="article:section" content="vuejs" />
+
+
+  <meta property="article:published_time" content="2020-06-11 08:19:10 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/">Fixing Safari&rsquo;s Cache With Vue.js (Developer Mode) (2020)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://jah.io/tags/frontend/">frontend</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/javascript/">javascript</a>&nbsp;
+    
+    #<a href="https://jah.io/tags/vuejs/">vuejs</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>I happen to like Apple&rsquo;s <a href="https://www.apple.com/safari/">Safari</a> browser, and I&rsquo;d like to use it when developing stuff with Vue.js. I ran into a problem with this, however: Safari would cache the response from the live-reload development server on localhost, so that when I made changes it didn&rsquo;t update, even when hitting the reload button. I <em>think</em> I&rsquo;ve solved this though with a <code>Cache-Control</code> header configued in the project&rsquo;s <code>vue.config.js</code> file.</p>
+<h3 id="tldr">tl;dr<a href="#tldr" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Put this in a file at project root called <code>vue.config.js</code>:</p>
+<p>module.exports = {  devServer: {    headers: {      &lsquo;Cache-Control&rsquo;: &lsquo;no-store&rsquo;    }  },  chainWebpack: (config) =&gt; {    if (process.env.NODE_ENV === &lsquo;development&rsquo;) {      config.plugins.delete(&lsquo;preload&rsquo;)    }  }}</p>
+<p>Kill the running <code>npm run serve</code> process then relaunch it, and reload the page in Safari. Live reload now seems to be giving us correct information.</p>
+<h3 id="the-problem">The problem<a href="#the-problem" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Say you did this:</p>
+<ol>
+<li><code>npm run serve</code></li>
+<li>Load <code>localhost:8080</code> in Safari, see your Vue app</li>
+<li>Make some changes and save</li>
+</ol>
+<p>You would <em>expect</em> live reload to fire and those new changes to be picked up. I mean hey, it works in like <em>every other browser out there</em>, why would Safari be any different?</p>
+<p>Well, it <em>is</em> different, for some damn reason. Doesn&rsquo;t really matter why, all that matters is that it won&rsquo;t do what you want it to do. If you do the exact same thing, but substitute &ldquo;Firefox&rdquo;, &ldquo;Opera&rdquo; or &ldquo;Chrome&rdquo; for &ldquo;Safari&rdquo; above, it works as expected. What the hell?</p>
+<h3 id="the-cache-control-header">The Cache-Control Header<a href="#the-cache-control-header" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Caching strategies obviously differ in the aforementioned browsers vs. Safari for something running in development mode. I&rsquo;m not interested in the specifics right now; all I care about is telling Safari <strong>not to cache anything</strong> from my dev server running on <code>localhost:8080</code>. In theory this should force Safari to re-initialize everything in the DOM when changes are made.</p>
+<p>My theory is that this will solve the problem. At least, I hope it will.</p>
+<p>So to do that, we need to configure <a href="https://webpack.js.org/configuration/dev-server/">webpack-dev-server</a>, which <code>vue-cli</code> is using under the hood to run our live-reload dev server. Turns out you can do this with a JavaScript configuration file named <strong>vue.config.js</strong> at the project root. It needs to export a module for <code>devServer</code> with a <code>headers</code> object setting <code>Cache-Control</code> to <code>no-store</code>:</p>
+<p>module.exports = {  devServer: {    headers: {      &lsquo;Cache-Control&rsquo;: &lsquo;no-store&rsquo;    }  }}</p>
+<p>You can read more about the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">Cache-Control Header</a> on MDN. Basically it&rsquo;s an HTTP header that tells the client (browser, whatever) how to cache the information it gets back. In this situation, we&rsquo;re setting it to <code>no-store</code> which is the configuration equivalent of &ldquo;don&rsquo;t store anything at all, dammit!&rdquo;.</p>
+<h3 id="deleting-the-preload-plugin">Deleting the &lsquo;preload&rsquo; Plugin<a href="#deleting-the-preload-plugin" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>I also ran across <a href="https://github.com/vuejs/vue-cli/issues/2509#issuecomment-474959168">this comment</a> in <code>vue-cli</code>&rsquo;s GitHub Issues that suggests deleting the <code>preload</code> plugin also helps. So to do that, just add another object to <code>module.exports</code>:</p>
+<p>module.exports = {  devServer: {    headers: {      &lsquo;Cache-Control&rsquo;: &lsquo;no-store&rsquo;    }  },  chainWebpack: (config) =&gt; {    if (process.env.NODE_ENV === &lsquo;development&rsquo;) {      config.plugins.delete(&lsquo;preload&rsquo;)    }  }}</p>
+<h3 id="verifying-the-header-change">Verifying the Header Change<a href="#verifying-the-header-change" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Create the configuration file with the above code, save it, then CTRL+C your running <code>npm run serve</code> process, then start it again (<code>npm run serve</code>). Now in another terminal tab/window, run:</p>
+<pre><code>$ curl -I http://localhost:8080
+
+</code></pre><p>You should see output similar to the following:</p>
+<pre><code>HTTP/1.1 200 OK
+X-Powered-By: Express
+Cache-Control: no-store
+Accept-Ranges: bytes
+Content-Type: text/html; charset=UTF-8
+Content-Length: 785
+ETag: W/&quot;311-JwxZQsNJwurfpMdtZree0SxO5ro&quot;
+Date: Fri, 03 Apr 2020 19:32:33 GMT
+Connection: keep-alive
+
+</code></pre><p>As you can see here, the third line shows our <code>Cache-Control</code> header with the configured value.</p>
+<h3 id="dont-do-this-in-prod">Don&rsquo;t do this in prod.<a href="#dont-do-this-in-prod" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>It should go without saying that doing this in production is a BadIdea™. You&rsquo;ll want to implement more sophisticated caching strategies for production-release code so that you can minimize the volume of unnecessary network traffic going into your app.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/">
+                <span class="button__icon">←</span>
+                <span class="button__text">React vs. Vue: An Explorative Comparison (2020)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/where-do-i-store-my-aws-credentials-for-working-with-terraform-2019/">
+                <span class="button__text">Where do I store my AWS credentials for working with Terraform? (2019)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

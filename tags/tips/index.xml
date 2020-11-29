@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tips on J. Austin Hughey: Developer Notebook</title>
+    <link>https://jah.io/tags/tips/</link>
+    <description>Recent content in tips on J. Austin Hughey: Developer Notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>2020 J. Austin Hughey</copyright>
+    <lastBuildDate>Thu, 11 Jun 2020 08:16:58 +0000</lastBuildDate><atom:link href="https://jah.io/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using dd to Create OS Installation Disks (USB) (2019)</title>
+      <link>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</link>
+      <pubDate>Thu, 11 Jun 2020 08:16:58 +0000</pubDate>
+      
+      <guid>https://jah.io/posts/using-dd-to-create-os-installation-disks-usb-2019/</guid>
+      <description>When creating OS installation media, a lot of people suggest using various third party tools, such as Etcher and others. However, it&amp;rsquo;s fairly easy just using dd (Data Dump) on any Unix-like OS to do the same thing.
+Zero Out the Disk Insert a USB stick and identify its appropriate name under /dev/. For MacOS, you can try diskutil list - just identify the disk that wasn&amp;rsquo;t there before you inserted your USB stick.</description>
+    </item>
+    
+  </channel>
+</rss>

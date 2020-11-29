@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Deleting a Windows 10 Storage Space Using PowerShell (2018) :: J. Austin Hughey: Developer Notebook</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="If you tried to delete a Storage Space via the built-in Windows GUI and it just hangs forever, try this PowerShell method for quickly deleting it so you can re-use your drives.
+I recently set up a Windows 10 Storage Space - basically a built-in software RAID - and realized the performance was horrible, so I went to delete it. But the GUI just sat there and hung for hours, with no progress and no errors reported." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/" />
+
+
+
+
+<link rel="stylesheet" href="https://jah.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://jah.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="https://jah.io/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="https://jah.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="jahrocks" />
+  
+    <meta name="twitter:creator" content="J. Austin Hughey" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Deleting a Windows 10 Storage Space Using PowerShell (2018)">
+<meta property="og:description" content="If you tried to delete a Storage Space via the built-in Windows GUI and it just hangs forever, try this PowerShell method for quickly deleting it so you can re-use your drives.
+I recently set up a Windows 10 Storage Space - basically a built-in software RAID - and realized the performance was horrible, so I went to delete it. But the GUI just sat there and hung for hours, with no progress and no errors reported." />
+<meta property="og:url" content="https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/" />
+<meta property="og:site_name" content="J. Austin Hughey: Developer Notebook" />
+
+  
+    <meta property="og:image" content="https://jah.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-06-11 08:15:16 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="blue">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    $ cd ~
+  </div>
+</a>
+
+    </div>
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://jah.io/posts/deleting-a-windows-10-storage-space-using-powershell-2018/">Deleting a Windows 10 Storage Space Using PowerShell (2018)</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2020-06-11 
+      </span>
+    
+    
+    <span class="post-author">:: J. Austin Hughey</span>
+    
+  </div>
+
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>If you tried to delete a Storage Space via the built-in Windows GUI and it just hangs forever, try this PowerShell method for quickly deleting it so you can re-use your drives.</p>
+<p>I recently set up a Windows 10 Storage Space - basically a built-in software RAID - and realized the performance was <em>horrible</em>, so I went to delete it. But the GUI just sat there and hung for hours, with no progress and no errors reported. After a shut-down, removal of the drives in question, removing the &ldquo;hidden&rdquo; devices from Device Manager (View -&gt; Show hidden devices), and a couple reboots, I finally found out how to remove the storage space itself from Windows, so that I could then re-use my drives in another way.</p>
+<h2 id="overview">Overview<a href="#overview" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>After launching an admin PowerShell session, we&rsquo;ll use some built-in tools to retrieve the name and status of the &ldquo;StoragePool&rdquo; object in question. Then using more of Windows built-in tools, we&rsquo;ll nuke it.</p>
+<h3 id="launch-a-powershell-admin-session">Launch a PowerShell Admin Session<a href="#launch-a-powershell-admin-session" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p><code>WIN+X</code> and navigate to &ldquo;Windows PowerShell (Admin)&rdquo; and pop that open.</p>
+<h3 id="get-the-name-and-status-of-the-storage-pool">Get the name and status of the storage pool<a href="#get-the-name-and-status-of-the-storage-pool" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>In this case, my storage pool was just named, aptly, &ldquo;Storage Pool&rdquo;.</p>
+<pre><code>PS C:\WINDOWS\system32&gt; Get-StoragePool
+
+FriendlyName OperationalStatus HealthStatus IsPrimordial IsReadOnly    Size AllocatedSize
+------------ ----------------- ------------ ------------ ----------    ---- -------------
+Storage pool Read-only         Unhealthy    False        False      2.73 TB        6.5 GB
+Primordial   OK                Healthy      True         False      4.28 TB      931.5 GB
+
+</code></pre><blockquote>
+<p>What&rsquo;s &ldquo;Primordial?&rdquo;</p>
+</blockquote>
+<p>I have no idea, and I&rsquo;m not at all a Windows admin. If somebody knows, holler at me and I&rsquo;ll update this post.</p>
+<h3 id="set-read-only-to-false">Set Read-Only to FALSE<a href="#set-read-only-to-false" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>The first major problem I ran into with this method was that trying to delete the storage pool always failed, saying that it&rsquo;s status was set to &ldquo;read only&rdquo;. After some searching, I found that you can use PowerShell to fix that, too:</p>
+<pre><code>PS C:\WINDOWS\system32&gt; Get-StoragePool -FriendlyName &quot;Storage pool&quot; | Set-StoragePool -IsReadOnly $false
+
+</code></pre><p>Now you should be able to modify the storage pool.</p>
+<h3 id="nuke-it">Nuke it<a href="#nuke-it" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Now that it&rsquo;s no longer read-only, you can delete the storage pool with this command:</p>
+<pre><code>PS C:\WINDOWS\system32&gt; Get-StoragePool -FriendlyName &quot;Storage pool&quot; | Remove-StoragePool
+
+Confirm
+Are you sure you want to perform this action?
+This will remove the StoragePool &quot;Storage pool&quot;.
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is &quot;Y&quot;): y
+PS C:\WINDOWS\system32&gt;
+
+</code></pre><p>As you can see here, it&rsquo;ll prompt you for confirmation interactively. <em>Real</em> Windows admins can probably tell me/you/us how to script that for non-interaction, but since my use case is &ldquo;power user&rdquo; I&rsquo;m fine with confirming interactively.</p>
+<p>Once you run this, in my case PowerShell displayed an interesting progress indicator at the top of the window itself for a few seconds, then it was done.</p>
+<blockquote>
+<p>How long will this take?</p>
+</blockquote>
+<p>Honestly, I don&rsquo;t know. When I used the Control Panel GUI to try to remove this storage space, it hung <em>forever and a day</em>, doing nothing but giving me a pretty green progress bar. After letting this run for quite a while, I tried to cancel it, but it just sat there doing the same thing. <em>I had to forcefully cut power to the computer entirely to move on.</em> After yanking the drives (USB 3), rebooting, yanking the USB <em>hub</em> too, and rebooting again, I was finally able to use the above commands to delete the storage space itself, thus freeing the drives from the OS perspective to be re-used. When I finally ran this, the deletion operation itself only took about 3 seconds. Bear in mind, however, I&rsquo;d already removed the USB 3 drives from Device Manager (remember: View -&gt; Show hidden devices) under &ldquo;Disk Drives&rdquo;, and all &ldquo;hidden&rdquo; and non-used volumes under &ldquo;Volumes&rdquo;. I suspect that&rsquo;s why this ran so fast in PowerShell, but I&rsquo;d be willing to bet you a Coke that doing it this way is almost always going to work faster and better!</p>
+<blockquote>
+<p>So if you&rsquo;re not using StorageSpaces, what <em>are</em> you planning to use?</p>
+</blockquote>
+<p>Right now I&rsquo;m leaning toward <a href="https://stablebit.com/DrivePool">StableBit DrivePool</a>. It&rsquo;s not quite software-RAID, in that it doesn&rsquo;t work like a RAID setup at all. Instead, it allows you to combine <code>N</code> number of disks of any kind &ldquo;in userspace&rdquo; basically and then creates a virtually-exposed &ldquo;disk&rdquo; for the operating system that is a proxy/abstraction layer on top of the disks you tell DrivePool to use. Then, when you write to the &ldquo;pooled&rdquo; (virtual) disk, DrivePool handles the work of duplicating files across the <em>physical</em> disks in the pool according to whatever settings you give it. Perhaps the biggest &ldquo;win&rdquo; here for this product, in my opinion, is that it does this on top of the existing filesystem on each disk, such that if you lose a disk or need to restore, you just access the files directly from the disk as if it&rsquo;s mounted NTFS or exFAT or whatever. <strong>You don&rsquo;t need to re-install DrivePool to recover your files &ndash; you just need to mount the disks normally.</strong></p>
+<p>The one downside of DrivePool in my experience (which I admit is nascent, at best) is that it tends to be pretty I/O heavy. It&rsquo;ll do a lot of work to duplicate files across your pool according to your policies that you set, and to reorganize data for better storage and performance, but this means it&rsquo;s very often engaged in disk I/O, so if you have slower disks (e.g. 5400RPM old school hard drives) over, say, USB2, <a href="https://www.youtube.com/watch?v=6Ls5j5iz2eA">You&rsquo;re Gonna Have a Bad Time</a>.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://jah.io/posts/hackintosh-how-to-find-out-what-motherboard-model-you-have-2018/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Hackintosh: How to find out what motherboard model you have (2018)</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://jah.io/posts/wget-download-entire-directories-over-http-2018/">
+                <span class="button__text">wget: Download entire directories over HTTP (2018)</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>2020 J. Austin Hughey</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://jah.io/assets/main.js"></script>
+<script src="https://jah.io/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
