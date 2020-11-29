@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2020 J. Austin Hughey</copyright>
-    <lastBuildDate>Thu, 11 Jun 2020 08:19:36 +0000</lastBuildDate><atom:link href="https://jah.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Jun 2020 08:19:10 +0000</lastBuildDate><atom:link href="https://jah.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>frontend</title>
       <link>https://jah.io/tags/frontend/</link>
-      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
+      <pubDate>Thu, 11 Jun 2020 08:19:10 +0000</pubDate>
       
       <guid>https://jah.io/tags/frontend/</guid>
       <description></description>
@@ -20,25 +20,16 @@
     <item>
       <title>javascript</title>
       <link>https://jah.io/tags/javascript/</link>
-      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
+      <pubDate>Thu, 11 Jun 2020 08:19:10 +0000</pubDate>
       
       <guid>https://jah.io/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>reactjs</title>
-      <link>https://jah.io/tags/reactjs/</link>
-      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
-      
-      <guid>https://jah.io/tags/reactjs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>vuejs</title>
       <link>https://jah.io/tags/vuejs/</link>
-      <pubDate>Thu, 11 Jun 2020 08:19:36 +0000</pubDate>
+      <pubDate>Thu, 11 Jun 2020 08:19:10 +0000</pubDate>
       
       <guid>https://jah.io/tags/vuejs/</guid>
       <description></description>

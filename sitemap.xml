@@ -4,71 +4,56 @@
   
   <url>
     <loc>https://jah.io/categories/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/frontend/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/categories/frontend/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/javascript/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/categories/javascript/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/posts/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/posts/react-vs-vue-an-explorative-comparison-2020/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/reactjs/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/categories/reactjs/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/tags/vuejs/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jah.io/categories/vuejs/</loc>
-    <lastmod>2020-06-11T08:19:36+00:00</lastmod>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://jah.io/posts/fixing-safaris-cache-with-vue-js-developer-mode-2020/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/frontend/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/frontend/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/javascript/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/javascript/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/posts/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/tags/vuejs/</loc>
+    <lastmod>2020-06-11T08:19:10+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jah.io/categories/vuejs/</loc>
     <lastmod>2020-06-11T08:19:10+00:00</lastmod>
   </url>
   
